@@ -1,24 +1,12 @@
-from flask import Flask, render_template, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import FlaskForm
-from wtforms import SelectField
+from flask import Flask, render_template
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resources.db'
-app.config['SECRET_KEY'] = 'secret'
-db = SQLAlchemy(app)
-
-class Resources (db.Model):
-    Subject = db.Column(db.String(100))
-    Grade = db.Column(db.Integer)
-    Equipment_required = db.Column(db.String(500))
-    URL = db.Column(db.String(500), unique = True, primary_key=True)
 
 subjects = [
-    {'sub': 'maths'},
-    {'sub': 'english'},
-    {'sub': 'science'},
-    {'sub': 'art'},
+    {'sub': 'Maths'},
+    {'sub': 'English'},
+    {'sub': 'Science'},
+    {'sub': 'Art'},
 ]
 
 equipments = [
@@ -29,7 +17,6 @@ equipments = [
     {'Equip': 'Camera'},
     {'Equip': 'Printer'},
     {'Equip': '3D Printer'},
-    {'Equip': 'Games'},
     {'Equip': 'No Equiment Available'},
 
 ]
@@ -39,19 +26,17 @@ grades = [
     {'grade': '2'}
 ]
 
-class Form(FlaskForm):
-    Subject = SelectField('Subject', choices = subjects)
-    Grade = SelectField('Grade', choices=grades)
-    Equipment = SelectField('Equipments', choices=equipments)
-
-@app.route('/', methods= ['GET', 'POST'])
+Types = [
+    {'type': 'Remote'},
+    {'type': 'Classroom'}
+]
+@app.route("/")
 def home():
-    form = Form()
-    return render_template('home.html', subjects= subjects, equipments= equipments, grades= grades, form=form)
+    return render_template('home.html', subjects= subjects, equipments= equipments, grades= grades, Types=Types)
 
-@app.route("/new")
+@app.route("/math")
 def new():
-    return render_template('new.html' , title= 'new')
+    return render_template('math.html' , title= 'math')
 
 if __name__ == '__main__':
     app.run(debug = True)
