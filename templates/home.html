@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="static/styles.css">
+    {%if title %}
+        <title> TeacheR - {{ title }}</title>
+    {%else%}
+        <title> TeacheR </title>
+    {% endif %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="header">
+        <h1>TeachR</h1>
+        <p>Providing teaching resources</p>
+      </div>
+
+      <div class="row">
+        <div class="side">
+            <h2>Select Subject</h2>
+            {% for subject in subjects %}
+                <input type="checkbox" id= {{subject.sub}} value= {{subject.sub}}>
+                    <label for= {{subject.sub}}>
+                        <div class="choices">{{ subject.sub }}</div>
+                    </label>
+                </input><br>
+                <script>
+                    function buttonClick(element){
+                        element.classList.toggle('active');
+                    }
+                </script>
+            {% endfor %}
+            
+            <h2>Select Grade</h2>
+            {% for grade in grades %}
+                <input type="checkbox" id= {{grade.grade}} value= {{grade.grade}}>
+                    <label for= {{grade.grade}}>
+                        <div class="choices">{{ grade.grade }}</div>
+                    </label>
+                </input><br>
+                <script>
+                    function buttonClick(element){
+                        element.classList.toggle('active');
+                    }
+                </script>
+            {% endfor %}
+        </div>
+        <div class="main">
+            <h2>Equipment Available</h2>
+            {% for equipment in equipments %}
+                <input type="checkbox" id= {{equipment.Equip}} value= {{equipment.Equip}}>
+                    <label for= {{equipment.Equip}}>
+                        <div class="choices">{{ equipment.Equip }}</div>
+                    </label>
+                </input><br>
+                <script>
+                    function buttonClick(element){
+                        element.classList.toggle('active');
+                    }
+                </script>
+            {% endfor %}
+            <div align="right">
+                <input type="button" value="Submit" />
+              </div>
+        </div>
+    </div>
+    <div class="footer">
+        <h5>TeachR created for SigmaHacks3</h5>
+      </div>
+            
+</body>
+</html>
